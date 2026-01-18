@@ -41,8 +41,7 @@ class Config:
     self.node_encoder_num_layers = node_encoder_num_layers
     self.node_latent_dim = node_latent_dim
 
-    #self.edge_dim = self.preproc_config.num_edge_ops
-    self.edge_dim = 44
+    self.edge_dim = self.preproc_config.num_edge_ops
     self.num_msg_pass_layers = num_msg_pass_layers
     self.share_weight = share_weight
     self.activation = activation

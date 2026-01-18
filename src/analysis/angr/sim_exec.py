@@ -122,7 +122,7 @@ class SimExecStrategy(object):
         reg_expr_val = reg_expr
 
       annot = RegisterReadAnnotation(state.addr, reg_offset, reg_expr)
-      sym_bv = state.solver.BVS(f"r[{reg_offset_int}]", reg_expr.length)
+      sym_bv = cp.BVS(f"r[{reg_offset_int}]", reg_expr.length)
       sym_bv = sym_bv.annotate(annot)
       state.solver.add(sym_bv == reg_expr_val)
       state.inspect.register_read_expr = sym_bv
@@ -154,7 +154,7 @@ class SimExecStrategy(object):
       mem_expr_val = mem_expr
 
     annot = MemoryReadAnnotation(state.addr, mem_addr, mem_expr)
-    sym_bv = state.solver.BVS(f"m[{mem_addr}]", mem_expr.length)
+    sym_bv = cp.BVS(f"m[{mem_addr}]", mem_expr.length)
     sym_bv = sym_bv.annotate(annot)
     state.solver.add(sym_bv == mem_expr_val)
     state.inspect.memory_read_expr = sym_bv
@@ -178,7 +178,7 @@ class SimExecStrategy(object):
         reg_expr_val = reg_expr
 
       annot = RegisterWriteAnnotation(state.addr, reg_offset, reg_expr)
-      sym_bv = state.solver.BVS(f"r[{reg_offset_int}]", reg_expr.length)
+      sym_bv = cp.BVS(f"r[{reg_offset_int}]", reg_expr.length)
       sym_bv = sym_bv.annotate(annot)
       state.solver.add(sym_bv == reg_expr_val)
       state.inspect.reg_write_expr = sym_bv
@@ -205,7 +205,7 @@ class SimExecStrategy(object):
       mem_expr_val = mem_expr
 
     annot = MemoryWriteAnnotation(state.addr, mem_addr, mem_expr)
-    sym_bv = state.solver.BVS(f"mem[{mem_addr}]", mem_expr.length)
+    sym_bv = cp.BVS(f"mem[{mem_addr}]", mem_expr.length)
     sym_bv = sym_bv.annotate(annot)
     state.solver.add(sym_bv == mem_expr_val)
     state.inspect.mem_write_expr = sym_bv
@@ -220,16 +220,16 @@ class SimExecStrategy(object):
     # Because we are ignoring the BP, SP, and IP during hooking, need to manually instatiate them
     # The SP and BP are symbolic since we want to track them, but IP is concrete
 
-    init_bp = state0.solver.BVV(self.config["init_bp"], self.arch.bits)
-    init_sp = state0.solver.BVV(self.config["init_sp"], self.arch.bits)
+    init_bp = cp.BVV(self.config["init_bp"], self.arch.bits)
+    init_sp = cp.BVV(self.config["init_sp"], self.arch.bits)
 
     if self.config["symbolize_init_pointers"]:
 
       bp_bv = self.register_offset_bitvector(self.arch.bp_offset)
       sp_bv = self.register_offset_bitvector(self.arch.sp_offset)
 
-      sym_bp = state0.solver.BVS(self.config["init_bp_sym_name"], self.arch.bits)
-      sym_sp = state0.solver.BVS(self.config["init_sp_sym_name"], self.arch.bits)
+      sym_bp = cp.BVS(self.config["init_bp_sym_name"], self.arch.bits)
+      sym_sp = cp.BVS(self.config["init_sp_sym_name"], self.arch.bits)
 
       sym_bp = sym_bp.annotate(RegisterWriteAnnotation(state0.addr, bp_bv, init_bp))
       sym_sp = sym_sp.annotate(RegisterWriteAnnotation(state0.addr, sp_bv, init_sp))
@@ -301,7 +301,7 @@ class SimExecStrategy(object):
     elif jumpkind == "Ijk_FakeRet":
       # Symbolize the return register
       ret_bv = self.register_offset_bitvector(self.arch.ret_offset)
-      sym_ret = state0.solver.BVS("ret", self.arch.bits)
+      sym_ret = cp.BVS("ret", self.arch.bits)
       sym_ret = sym_ret.annotate(RegisterWriteAnnotation(state0.addr, ret_bv, sym_ret))
       state0.registers.store(self.arch.ret_offset, sym_ret, size=self.arch.bytes, inspect=False)
 
@@ -313,7 +313,7 @@ class SimExecStrategy(object):
             not (areg_offset == self.arch.bp_offset or areg_offset == self.arch.sp_offset)):
           areg_bv = self.register_offset_bitvector(areg_offset)
           areg_bitsize = areg_info[1] * self.arch.byte_width
-          sym_areg = state0.solver.BVS("r[{areg_offset}]", areg_bitsize)
+          sym_areg = cp.BVS("r[{areg_offset}]", areg_bitsize)
           sym_areg = sym_areg.annotate(RegisterWriteAnnotation(state0.addr, areg_bv, sym_areg))
           state0.registers.store(areg_offset, sym_areg, size=areg_info[1], inspect=False)
 

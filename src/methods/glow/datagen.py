@@ -53,6 +53,7 @@ class Options:
     pool_size=10, # Between, 16, 32, 64, this seems to be a "sweet spot"
     skip_function_with_no_vars=True,
     skip_vars_with_no_nodes=True,
+    max_functions=None,
   ):
     self.verbose = verbose
     self.parallel = parallel
@@ -64,6 +65,7 @@ class Options:
     self.predict_phase = predict_phase
     self.skip_function_with_no_vars = skip_function_with_no_vars
     self.skip_vars_with_no_nodes = skip_vars_with_no_nodes
+    self.max_functions = max_functions
 
     self.explored_functions = []
 
@@ -503,6 +505,7 @@ def generate_glow_dataset_parallel(input_file_name: str, out_file_dir: str, opti
 
 def generate_glow_dataset_no_parallel(input_file_name: str, out_file_dir: str, options: Options) -> Iterator[Tuple[GlowInput, GlowOutput]]:
   import logging
+  import gc
   logging.getLogger('angr').setLevel('ERROR')
   ign_fns = ignore_functions(options)
 
@@ -514,8 +517,15 @@ def generate_glow_dataset_no_parallel(input_file_name: str, out_file_dir: str, o
   strat_config = None
   strategy = LessSimpleDominatorStrategy(proj, config=strat_config)
 
+  func_count = 0
+  processed_count = 0
   # Iterate through all subprograms in the dwarf info
   for subprogram in dwarf_info_to_subprograms(dwarf_info):
+    # Check max functions limit
+    if options.max_functions is not None and processed_count >= options.max_functions:
+      print(f"[Info] Reached max_functions limit ({options.max_functions}), stopping")
+      break
+
     # First find the functions
     (directory, file_name, func_name, low_high_pc, _, _) = subprogram
     if func_name in ign_fns or (directory, file_name, func_name) in ign_fns:
@@ -579,6 +589,12 @@ def generate_glow_dataset_no_parallel(input_file_name: str, out_file_dir: str, o
     glow_output = GlowOutput(filtered_tys)
 
     yield (glow_input, glow_output)
+
+    # Memory management: run garbage collection periodically
+    func_count += 1
+    processed_count += 1
+    if func_count % 5 == 0:
+      gc.collect()
 
   if options.verbose:
     stats.print()

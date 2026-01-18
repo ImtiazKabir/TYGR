@@ -14,6 +14,7 @@ def setup_parser(parser: ArgumentParser):
   parser.add_argument("--ignore-functions", type=str, default="src/data/ignore_functions.json")
   parser.add_argument("--output-functions", type=str, default=None)
   parser.add_argument("--max-input-kbs", type=int, default=150*1024*1024) # 150 MB
+  parser.add_argument("--max-functions", type=int, default=None, help="Limit number of functions to process (for memory-constrained systems)")
 
 def main(args):
 

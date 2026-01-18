@@ -53,7 +53,7 @@ def main(args):
   # GPU
   setup_cuda(args.gpu)
   # Load model
-  model = torch.load(args.model)
+  model = torch.load(args.model, weights_only=False)
 
   # Method
   method = get_method(args.method, args, phase="test")

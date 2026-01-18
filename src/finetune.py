@@ -55,11 +55,11 @@ def main(args):
   train_set, test_set = method.preproc_fine_tuning(dataset)
 
   # Model
-  model = torch.load(args.model)
+  model = torch.load(args.model, weights_only=False)
 
   # Optimizer
   optimizer = get_optimizer(args, model)
-  scheduler = ReduceLROnPlateau(optimizer, 'max', patience=3, min_lr=1e-6, factor=0.1, verbose=True)
+  scheduler = ReduceLROnPlateau(optimizer, 'max', patience=3, min_lr=1e-6, factor=0.1)
 
   # Best Performance
   minimal_loss = 1000000000

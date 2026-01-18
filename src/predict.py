@@ -30,7 +30,7 @@ def main(args):
   setup_cuda(args.gpu)
 
   # Load model
-  model = torch.load(args.model)
+  model = torch.load(args.model, weights_only=False)
 
   # Generate the input data
   method = get_method(args.method, args, phase="predict")

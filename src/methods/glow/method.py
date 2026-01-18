@@ -24,6 +24,7 @@ class Glow(Method[GlowInput, PreprocGlowInput, GlowOutput, Tensor]):
         no_splice=self.args.no_splice,
         ignore_functions_file=self.args.ignore_functions,
         output_functions=self.args.output_functions,
+        max_functions=getattr(self.args, 'max_functions', None),
       )
 
     # Prepare preprocessor configuration if we are in learning phase

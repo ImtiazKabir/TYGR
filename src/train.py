@@ -57,7 +57,7 @@ def main(args):
 
   # Optimizer
   optimizer = get_optimizer(args, model)
-  scheduler = ReduceLROnPlateau(optimizer, 'max', patience=3, min_lr=1e-6, factor=0.1, verbose=True)
+  scheduler = ReduceLROnPlateau(optimizer, 'max', patience=3, min_lr=1e-6, factor=0.1)
 
   # Best Performance
   minimal_loss = 1000000000

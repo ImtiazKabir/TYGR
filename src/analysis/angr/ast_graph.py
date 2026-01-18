@@ -250,31 +250,31 @@ class AstGraph(object):
     (reg_writes, mem_writes, reg_reads, mem_reads) = get_state_WR(state, func_param_locs)
 
     for i, (reg_offset, (addr, reg_expr)) in enumerate(reg_writes.items()):
-      reg_bv = state.solver.BVV(reg_offset, reg_expr.length)
+      reg_bv = cp.BVV(reg_offset, reg_expr.length)
       annot = RegisterWriteAnnotation(addr, reg_bv, reg_expr)
-      todo_bv = state.solver.BVS(f"r[{reg_offset}]", reg_expr.length)
+      todo_bv = cp.BVS(f"r[{reg_offset}]", reg_expr.length)
       todo_bv = todo_bv.annotate(annot)
       self.process_ast(state, todo_bv, func_param_locs)
 
     
     for i, (mem_addr, (addr, mem_expr)) in enumerate(mem_writes.items()):
       annot = MemoryWriteAnnotation(addr, mem_addr, mem_expr)
-      todo_bv = state.solver.BVS(f"m[{mem_addr}]", mem_expr.length)
+      todo_bv = cp.BVS(f"m[{mem_addr}]", mem_expr.length)
       todo_bv = todo_bv.annotate(annot)
       self.process_ast(state, todo_bv, func_param_locs)
 
 
     for i, (reg_offset, (addr, reg_expr)) in enumerate(reg_reads.items()):
-      reg_bv = state.solver.BVV(reg_offset, reg_expr.length)
+      reg_bv = cp.BVV(reg_offset, reg_expr.length)
       annot = RegisterReadAnnotation(addr, reg_bv, reg_expr)
-      todo_bv = state.solver.BVS(f"r[{reg_offset}]", reg_expr.length)
+      todo_bv = cp.BVS(f"r[{reg_offset}]", reg_expr.length)
       todo_bv = todo_bv.annotate(annot)   
       self.process_ast(state, todo_bv, func_param_locs)
 
 
     for i, (mem_addr, (addr, mem_expr)) in enumerate(mem_reads.items()):
       annot = MemoryReadAnnotation(addr, mem_addr, mem_expr)
-      todo_bv = state.solver.BVS(f"m[{mem_addr}]", mem_expr.length)
+      todo_bv = cp.BVS(f"m[{mem_addr}]", mem_expr.length)
       todo_bv = todo_bv.annotate(annot)
       self.process_ast(state, todo_bv, func_param_locs) 
 
