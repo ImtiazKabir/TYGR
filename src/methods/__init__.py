@@ -4,6 +4,8 @@ from .method import Method
 from .flow import Flow, setup_parser as flow_setup_parser
 from .glow import Glow, setup_parser as glow_setup_parser
 from .glow_th import GlowTH, setup_parser as glow_th_setup_parser
+from .glow_gat import GlowGATMethod, setup_parser as glow_gat_setup_parser
+from .glow_rgat import GlowRGATMethod, setup_parser as glow_rgat_setup_parser
 
 DEFAULT_METHOD = "glow"
 
@@ -14,6 +16,10 @@ def get_method(name: str, args, phase) -> Method:
     return Glow(args, phase)
   elif name == "glow-th":
     return GlowTH(args, phase)
+  elif name == "glow_gat":
+    return GlowGATMethod(args, phase)
+  elif name == "glow_rgat":
+    return GlowRGATMethod(args, phase)
   else:
     raise Exception(f"Unknown method {name}")
 
@@ -21,3 +27,5 @@ def setup_parser(parser: ArgumentParser):
   flow_setup_parser(parser)
   glow_setup_parser(parser)
   glow_th_setup_parser(parser)
+  glow_gat_setup_parser(parser)
+  glow_rgat_setup_parser(parser)
