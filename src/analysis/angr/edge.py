@@ -20,6 +20,7 @@ REDUCED_OPS = [
   'LShR', '__lshift__', '__rshift__',
   'If', 'Or', 'Not', 'And', 'Xor', 'Eq',
   'fp_conv', 'fp_op', 'fp_cmp',
+  'var_hyper',  # Hyperedge edges for variable-centric hypergraph
 ]
 
 REDUCE_OP_MAP = {
