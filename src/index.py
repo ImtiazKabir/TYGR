@@ -12,6 +12,7 @@ from . import predict
 from . import train
 from . import test
 from . import hypergraph_convert
+from . import true_hypergraph_convert
 
 from . import patch_arch
 
@@ -30,6 +31,7 @@ modules = {
   # Other stuffs
   "patch-arch": patch_arch,
   "hypergraph_convert": hypergraph_convert,
+  "true_hypergraph_convert": true_hypergraph_convert,
 }
 
 def parser():
