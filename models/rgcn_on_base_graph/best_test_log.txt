@@ -1,0 +1,5 @@
+Source #functions: 108
+Well Formed #functions: 108
+Source #vars: 561
+Well Formed #vars: 561
+  0%|          | 0/3 [00:00<?, ?it/s][Test]: Avg loss 0.5151, Accuracy0.8891, Precision 0.9046,  Recall 0.8891,  F1 0.8968:   0%|          | 0/3 [00:00<?, ?it/s][Test]: Avg loss 0.5151, Accuracy0.8891, Precision 0.9046,  Recall 0.8891,  F1 0.8968:  33%|███▎      | 1/3 [00:00<00:01,  1.10it/s][Test]: Avg loss 0.3407, Accuracy0.9074, Precision 0.9160,  Recall 0.9074,  F1 0.9117:  33%|███▎      | 1/3 [00:02<00:01,  1.10it/s][Test]: Avg loss 0.3407, Accuracy0.9074, Precision 0.9160,  Recall 0.9074,  F1 0.9117:  67%|██████▋   | 2/3 [00:02<00:01,  1.17s/it][Test]: Avg loss 0.3418, Accuracy0.8951, Precision 0.9023,  Recall 0.8951,  F1 0.8987:  67%|██████▋   | 2/3 [00:02<00:01,  1.17s/it][Test]: Avg loss 0.3418, Accuracy0.8951, Precision 0.9023,  Recall 0.8951,  F1 0.8987: 100%|██████████| 3/3 [00:02<00:00,  1.15it/s][Test]: Avg loss 0.3418, Accuracy0.8951, Precision 0.9023,  Recall 0.8951,  F1 0.8987: 100%|██████████| 3/3 [00:02<00:00,  1.08it/s]

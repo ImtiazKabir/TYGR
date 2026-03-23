@@ -1,0 +1,9 @@
+[GlowHGNN] Hybrid HGNN with 8 RGAT + 2 HypergraphConv layers
+[GlowHGNN] 4 attention heads, 62 relations
+[GlowHGNN] Fusion mode: concat
+[GlowHGNN] Output types: 75
+Source #functions: 108
+Well Formed #functions: 108
+Source #vars: 561
+Well Formed #vars: 561
+  0%|          | 0/3 [00:00<?, ?it/s][Test]: Avg loss 0.3535, Accuracy0.8927, Precision 0.9036,  Recall 0.8927,  F1 0.8981:   0%|          | 0/3 [00:00<?, ?it/s][Test]: Avg loss 0.3535, Accuracy0.8927, Precision 0.9036,  Recall 0.8927,  F1 0.8981:  33%|███▎      | 1/3 [00:00<00:00,  2.67it/s][Test]: Avg loss 0.2828, Accuracy0.9168, Precision 0.9226,  Recall 0.9168,  F1 0.9197:  33%|███▎      | 1/3 [00:00<00:00,  2.67it/s][Test]: Avg loss 0.2828, Accuracy0.9168, Precision 0.9226,  Recall 0.9168,  F1 0.9197:  67%|██████▋   | 2/3 [00:00<00:00,  2.40it/s][Test]: Avg loss 0.3260, Accuracy0.8980, Precision 0.9042,  Recall 0.8980,  F1 0.9011:  67%|██████▋   | 2/3 [00:01<00:00,  2.40it/s][Test]: Avg loss 0.3260, Accuracy0.8980, Precision 0.9042,  Recall 0.8980,  F1 0.9011: 100%|██████████| 3/3 [00:01<00:00,  2.23it/s][Test]: Avg loss 0.3260, Accuracy0.8980, Precision 0.9042,  Recall 0.8980,  F1 0.9011: 100%|██████████| 3/3 [00:01<00:00,  2.29it/s]
