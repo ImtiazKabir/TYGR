@@ -175,7 +175,9 @@ class Glow(Method[GlowInput, PreprocGlowInput, GlowOutput, Tensor]):
       subprog_low_pc = inp.low_high_pc[0]
       x = self.preproc_input(inp, None)
       num_vars, node_labels, edge_labels, edges, var_gather, var_scatter = predict.collate_inputs([x])
-      y_pred, loss = model(num_vars, node_labels, edge_labels, edges, var_gather, var_scatter, None)
+      # Pack as tuple for newer models (RGAT, HGNN) that expect tuple input
+      model_input = (num_vars, node_labels, edge_labels, edges, var_gather, var_scatter, None)
+      y_pred, loss = model(model_input)
       (n, _) = y_pred.size()
 
       btype_dict = dict()

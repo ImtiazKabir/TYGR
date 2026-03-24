@@ -1,0 +1,63 @@
+=== TYGR Type Inference Comparison ===
+
+Source: predictions/test.c
+Model:  models/rgat_on_star_hypergraph/rgat_on_star_hypergraph.best.model
+
+Compiling with debug info...
+Binary: /tmp/tmp.uZimvaoK95/test.o
+
+Running type inference...
+
+Loading model: models/rgat_on_star_hypergraph/rgat_on_star_hypergraph.best.model
+Analyzing binary: /tmp/tmp.uZimvaoK95/test.o
+Method: glow_rgat (hypergraph: False)
+enter parallel
+10
+|- [Info] No variable in function swap
+Found 4 functions with variables
+
+================================================================================
+
+Function: countValue @ 0x143
+----------------------------------------------------------------------
+Variable             Actual Type               Inferred Type        Match
+----------------------------------------------------------------------
+data                 i32*                      i32*                 Y
+size                 i32                       i32                  Y
+val                  i32                       i32                  Y
+count                i32                       i32                  Y
+idx                  i32                       i32                  Y
+
+Function: findMax @ 0xe1
+----------------------------------------------------------------------
+Variable             Actual Type               Inferred Type        Match
+----------------------------------------------------------------------
+arr                  i32*                      i32*                 Y
+len                  i32                       i32                  Y
+max                  i32                       i32                  Y
+i                    i32                       i32                  Y
+
+Function: sumArray @ 0x97
+----------------------------------------------------------------------
+Variable             Actual Type               Inferred Type        Match
+----------------------------------------------------------------------
+nums                 i32*                      i32*                 Y
+n                    i32                       i32                  Y
+total                i64                       i64                  Y
+i                    i32                       i32                  Y
+
+Function: binarySearch @ 0x0
+----------------------------------------------------------------------
+Variable             Actual Type               Inferred Type        Match
+----------------------------------------------------------------------
+arr                  i32*                      i32*                 Y
+size                 i32                       i32                  Y
+target               i32                       i32                  Y
+left                 i32                       i32                  Y
+right                i32                       i32                  Y
+mid                  i32                       i32                  Y
+
+================================================================================
+Total variables: 19
+Correct predictions: 19
+Accuracy: 100.00%

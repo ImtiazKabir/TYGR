@@ -13,6 +13,8 @@ from . import train
 from . import test
 from . import hypergraph_convert
 from . import true_hypergraph_convert
+from . import view_predictions
+from . import compare_types
 
 from . import patch_arch
 
@@ -32,6 +34,8 @@ modules = {
   "patch-arch": patch_arch,
   "hypergraph_convert": hypergraph_convert,
   "true_hypergraph_convert": true_hypergraph_convert,
+  "view_predictions": view_predictions,
+  "compare_types": compare_types,
 }
 
 def parser():

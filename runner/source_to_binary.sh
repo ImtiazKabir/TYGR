@@ -11,5 +11,5 @@ for f in "$src_dir"/*.c; do
     [ -e "$f" ] || continue  # handle no matches
 
     base="$(basename "$f" .c)"
-    gcc -O0 -g "$f" -o "$bin_dir/$base"
+    gcc -O0 -g -c "$f" -o "$bin_dir/$base.o"
 done
